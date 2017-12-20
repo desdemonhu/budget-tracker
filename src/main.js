@@ -1,14 +1,7 @@
 import './style/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import store from './index.js';
+import App from './component/app/index.js';
 
-class App extends React.Component {
-  constructor(props){
-    super(props)
-    ///state goes here
-  }
-
-  render(){
-    return ///templated hmtl
-  }
-}
+ReactDOM.render(<App />, document.getElementById('root'));
