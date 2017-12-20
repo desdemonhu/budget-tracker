@@ -14,7 +14,7 @@ store.category.subscribe(() => {
 });
 
 store.category.dispatch({type: 'CATEGORY_CREATE', payload:{name: 'taco'}});
-store.category.dispatch({type: 'CATEGORY_UPDATE', payload:{index: 1, update:{name: 'Sammich'}}});
+store.category.dispatch({type: 'CATEGORY_UPDATE', payload:{id: 'hhh', update:{name: 'Sammich'}}});
 store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {name: 'taco'}})
 ///store.getState
 ///store.disptach({type:'', payload:})
