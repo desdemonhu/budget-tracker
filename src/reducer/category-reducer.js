@@ -35,6 +35,7 @@ const reducer = (state = initState, action) => {
       }
       return state;
     case 'CATEGORY_DESTORY':
+    ///payload: {id: uuid}
       return state.filter(category => category.id !== payload.id);
   default:
     return state;
