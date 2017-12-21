@@ -18,3 +18,5 @@ store.category.dispatch({type: 'CATEGORY_UPDATE', payload:{id: 'hhh', update:{na
 store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {name: 'taco'}})
 ///store.getState
 ///store.disptach({type:'', payload:})
+
+module.exports = store;
