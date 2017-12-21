@@ -13,9 +13,9 @@ store.category.subscribe(() => {
   console.log('__STATE__', store.category.getState());
 });
 
-store.category.dispatch({type: 'CATEGORY_CREATE', payload:{name: 'taco'}});
-store.category.dispatch({type: 'CATEGORY_UPDATE', payload:{id: 'hhh', update:{name: 'Sammich'}}});
-store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {name: 'taco'}})
+// store.category.dispatch({type: 'CATEGORY_CREATE', payload:{name: 'taco'}});
+// store.category.dispatch({type: 'CATEGORY_UPDATE', payload:{id: 'hhh', update:{name: 'Sammich'}}});
+// store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {name: 'taco'}})
 ///store.getState
 ///store.disptach({type:'', payload:})
 

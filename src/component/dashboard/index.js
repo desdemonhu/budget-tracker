@@ -24,9 +24,7 @@ class Dashboard extends React.Component {
           {this.state.store.map(category =>{
             return (
               <div>
-              <Category category={category} store={store} />
-              <button value={category.id}>Delete</button>
-              <button value={category.id}>Update</button>
+              <Category category={category} updateList={this.updateList}/>
               </div>
             )
           })}

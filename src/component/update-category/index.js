@@ -1,32 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
-import uuid from 'uuid'
 let store = require('../../index.js') ;
 
-class FormCategory extends React.Component {
+class UpdateCategory extends React.Component {
   constructor(props){
     super(props)
     ///state goes here
     this.state = {
-      store: this.props.store,
+      category: this.props.category,
       local: {
-        name: '',
-        budget: 0,
-      }
-    }
-  }
-
-  clearState(){
-    this.state.local = {
-      name: '',
-      budget: 0,
+        name: this.props.category.name || '',
+        budget: this.props.category.budget || 0,
+      },
+      view: this.props.showUpdateForm,
     }
   }
 
   nameUpdate = (event) => {
     this.setState({local: {...this.state.local,
-                          name: event.target.value}})
+                            name: event.target.value}
+    })
   }
 
   budgetUpdate = (event) => {
@@ -34,31 +28,27 @@ class FormCategory extends React.Component {
                           budget: event.target.value}})
   }
 
-  createCateogry = (e) => {
-    e.preventDefault();
-    let category = this.state.local;
-    category.id = uuid.v1();
-    category.stamp = new Date().toString();
+  UpdateCategory = (event) => {
+    event.preventDefault();
+    ///payload: {id: 'uuid', update:{name: 'name'}}
+    store.category.dispatch({type: 'CATEGORY_UPDATE', payload: {id: event.target.value,
+    update:this.state.local}})
 
-    store.category.dispatch({type: 'CATEGORY_CREATE', payload: category})
-
-    this.props.updateList(store.category.getState());
-
-    this.clearState();
+    this.props.hideUpdateForm();
   }
 
   render(){
     return (
       <div>
-        <h1>Form Category</h1>
+        <h1>Update Form</h1>
         <form>
           <input type="text" value={this.state.local.name} onChange={this.nameUpdate}></input>
           <input type="number" value={this.state.local.budget} onChange={this.budgetUpdate}></input>
-          <button type="submit" onClick={this.createCateogry}>Add Category</button>
+          <button type="submit" value={this.state.category.id} onClick={this.UpdateCategory}>Update Category</button>
         </form>
       </div>
-      )
+    )
   }
 }
 
-export default FormCategory
+export default UpdateCategory

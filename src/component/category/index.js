@@ -1,16 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UpdateCategory from '../update-category'
+let store = require('../../index.js') ;
 
 class Category extends React.Component {
   constructor(props){
     super(props)
     ///state goes here
     this.state = {
-      store: this.props.store,
-      category: this.props.category
+      category: this.props.category,
+      local: {
+        showUpdateForm: false
+      }
     }
   }
 
+  showUpdateForm = () => {
+    this.setState({local:{showUpdateForm: true}})
+  }
+
+  hideUpdateForm = () => {
+    this.setState({local: {showUpdateForm: false}})
+  }
+
+  deleteCategory = (event) => {
+    store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {id: event.target.value}})
+
+    this.props.updateList(store.category.getState())
+  }
 
   render(){
     return (
@@ -25,6 +42,13 @@ class Category extends React.Component {
               })
             }
           </ul>
+          <button value={this.state.category.id} onClick={this.deleteCategory} >Delete</button>
+          <button value={this.state.category.id} onClick={this.showUpdateForm}>Update</button>
+          {
+            this.state.local.showUpdateForm === true && (
+              <UpdateCategory hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
+            )
+          }
         </li>
       </div>
       )

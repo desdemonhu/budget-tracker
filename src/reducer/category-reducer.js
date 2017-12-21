@@ -2,10 +2,7 @@
 
 import {createStore} from 'redux';
 
-let initState = [
-                {name: 'travel'},
-                {name: 'entertainment', id: 'hhh'}
-              ];
+let initState = [];
 
 ///CATEGORY_CREATE, CATEGORY_UPDATE, CATEGORY_DESTORY
 /// case 'string':
@@ -38,7 +35,7 @@ const reducer = (state = initState, action) => {
       }
       return state;
     case 'CATEGORY_DESTORY':
-      return state.filter(category => category.name !== payload.name);
+      return state.filter(category => category.id !== payload.id);
   default:
     return state;
   }
