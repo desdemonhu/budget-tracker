@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
-import uuid from 'uuid'
 import * as action from '../../reducer/action/category-action.js'
-let store = require('../../index.js')
 
 class FormCategory extends React.Component {
   constructor(props){
     super(props)
     ///state goes here
     this.state = {
-      store: this.props.store,
       local: {
         name: '',
         budget: 0,
@@ -37,11 +34,7 @@ class FormCategory extends React.Component {
 
   createCateogry = (e) => {
     e.preventDefault();
-    // store.category.dispatch(action.create(this.state.local))
-    //
-    // this.props.updateList(store.category.getState());
     this.props.onComplete(this.state.local);
-
     this.clearState();
   }
 

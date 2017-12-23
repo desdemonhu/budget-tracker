@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import UpdateCategory from '../update-category'
 import * as action from '../../reducer/action/category-action.js'
-let store = require('../../index.js') ;
 
 class Category extends React.Component {
   constructor(props){
@@ -25,9 +24,6 @@ class Category extends React.Component {
   }
 
   deleteCategory = (event) => {
-    // store.category.dispatch(action.destroy(event.target.value))
-    //
-    // this.props.updateList()
     this.props.categoryDestroy(event.target.value);
   }
 
