@@ -15,11 +15,11 @@ const reducer = (state = initState, action) => {
     case 'CATEGORY_CREATE':
       return [...state, payload];
     case 'CATEGORY_UPDATE':
-      ///payload: {id: 'uuid', update:{name: 'name'}}
-      return state.map(item => item.id === payload.id ? payload.update : item)
+      ///payload: {key: 'uuid', update:{name: 'name'}}
+      return state.map(item => item.key === payload.key ? payload.update : item)
     case 'CATEGORY_DESTORY':
-    ///payload: {id: uuid}
-      return state.filter(category => category.key !== payload.id);
+    ///payload: {key: uuid}
+      return state.filter(category => category.key !== payload.key);
   default:
     return state;
   }

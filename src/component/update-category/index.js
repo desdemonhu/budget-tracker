@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
+import * as action from '../../reducer/action/category-action.js'
 let store = require('../../index.js') ;
 
 class UpdateCategory extends React.Component {
@@ -32,8 +33,10 @@ class UpdateCategory extends React.Component {
   UpdateCategory = (event) => {
     event.preventDefault();
     ///payload: {id: 'uuid', update:{name: 'name'}}
-    store.category.dispatch({type: 'CATEGORY_UPDATE', payload: {id: event.target.value,
-    update:this.state.local}})
+    store.category.dispatch(action.update(
+      {key: event.target.value,
+        update: this.state.local}
+      ))
 
     this.props.updateItem(this.state.local)
 

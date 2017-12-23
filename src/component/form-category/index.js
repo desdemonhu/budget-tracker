@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
 import uuid from 'uuid'
-let store = require('../../index.js') ;
+import * as action from '../../reducer/action/category-action.js'
+let store = require('../../index.js')
 
 class FormCategory extends React.Component {
   constructor(props){
@@ -36,11 +37,7 @@ class FormCategory extends React.Component {
 
   createCateogry = (e) => {
     e.preventDefault();
-    let category = this.state.local;
-    category.key = uuid.v1();
-    category.stamp = new Date().toString();
-
-    store.category.dispatch({type: 'CATEGORY_CREATE', payload: category})
+    store.category.dispatch(action.create(this.state.local))
 
     this.props.updateList(store.category.getState());
 
