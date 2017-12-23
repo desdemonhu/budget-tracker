@@ -46,8 +46,8 @@ class FormCategory extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.store){
-      this.setState(nextProps.store)
+    if(nextProps.state){
+      this.setState(nextProps.state)
     }
   }
 

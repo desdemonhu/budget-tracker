@@ -33,14 +33,26 @@ class UpdateCategory extends React.Component {
   UpdateCategory = (event) => {
     event.preventDefault();
     ///payload: {id: 'uuid', update:{name: 'name'}}
-    store.category.dispatch(action.update(
-      {key: event.target.value,
-        update: this.state.local}
-      ))
+    // store.category.dispatch(action.update(
+    //   {key: event.target.value,
+    //     update: this.state.local}
+    //   ))
+    //
+    // this.props.updateItem(this.state.local)
+    this.props.categoryUpdate({
+      key: event.target.value,
+      update: this.state.local,
+    })
 
     this.props.updateItem(this.state.local)
 
     this.props.hideUpdateForm();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.state){
+      this.setState(nextProps.state)
+    }
   }
 
   render(){

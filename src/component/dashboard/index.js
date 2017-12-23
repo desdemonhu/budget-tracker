@@ -21,12 +21,15 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Dashboard</h1>
-        <FormCategory store={store} onComplete={this.props.categoryCreate}/>
+        <FormCategory onComplete={this.props.categoryCreate}/>
         <ul>
-          {this.state.store.map(category =>{
+          {this.props.state.map((category,i) =>{
             return (
-              <div>
-              <Category category={category} updateList={this.updateList}/>
+              <div key={i}>
+              <Category category={category}
+              categoryUpdate={this.props.categoryUpdate}
+              categoryDestroy={this.props.categoryDestroy}
+              updateList={this.updateList}/>
               </div>
             )
           })}
@@ -38,13 +41,15 @@ class Dashboard extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    state: state,
+    state: state || [],
   }
 }
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    categoryCreate: (data) => dispatch(action.create(data))
+    categoryCreate: (data) => dispatch(action.create(data)),
+    categoryUpdate: (data) => dispatch(action.update(data)),
+    categoryDestroy: (data) => dispatch(action.destroy(data)),
   }
 }
 

@@ -25,14 +25,22 @@ class Category extends React.Component {
   }
 
   deleteCategory = (event) => {
-    store.category.dispatch(action.destroy(event.target.value))
-
-    this.props.updateList()
+    // store.category.dispatch(action.destroy(event.target.value))
+    //
+    // this.props.updateList()
+    this.props.categoryDestroy(event.target.value);
   }
 
   updateItem = (update) => {
     this.setState({category: update})
   }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.state){
+      this.setState(nextProps.state)
+    }
+  }
+
 
   render(){
     return (
@@ -51,6 +59,7 @@ class Category extends React.Component {
           {
             this.state.local.showUpdateForm === true && (
               <UpdateCategory
+              categoryUpdate={this.props.categoryUpdate}
               updateItem={this.updateItem} hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
             )
           }
