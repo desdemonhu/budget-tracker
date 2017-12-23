@@ -11,8 +11,8 @@ class Dashboard extends React.Component {
     this.state = {store: store.category.getState()}
   }
 
-  updateList = (newStore) =>{
-    this.setState({store: newStore})
+  updateList = () =>{
+    this.setState({store: store.category.getState()})
   }
 
   render(){

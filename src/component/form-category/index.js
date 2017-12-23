@@ -37,7 +37,7 @@ class FormCategory extends React.Component {
   createCateogry = (e) => {
     e.preventDefault();
     let category = this.state.local;
-    category.id = uuid.v1();
+    category.key = uuid.v1();
     category.stamp = new Date().toString();
 
     store.category.dispatch({type: 'CATEGORY_CREATE', payload: category})

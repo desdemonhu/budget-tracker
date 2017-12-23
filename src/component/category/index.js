@@ -26,13 +26,16 @@ class Category extends React.Component {
   deleteCategory = (event) => {
     store.category.dispatch({type: 'CATEGORY_DESTORY', payload: {id: event.target.value}})
 
-    this.props.updateList(store.category.getState())
+    this.props.updateList()
+  }
+
+  updateItem = (update) => {
+    this.setState({category: update})
   }
 
   render(){
     return (
       <div>
-      {console.log(this.state.category)}
         <li>{this.state.category.name}
           <ul>
             {Object.keys(this.state.category).map(key => {
@@ -42,11 +45,12 @@ class Category extends React.Component {
               })
             }
           </ul>
-          <button value={this.state.category.id} onClick={this.deleteCategory} >Delete</button>
-          <button value={this.state.category.id} onClick={this.showUpdateForm}>Update</button>
+          <button value={this.state.category.key} onClick={this.deleteCategory} >Delete</button>
+          <button value={this.state.category.key} onClick={this.showUpdateForm}>Update</button>
           {
             this.state.local.showUpdateForm === true && (
-              <UpdateCategory hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
+              <UpdateCategory
+              updateItem={this.updateItem} hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
             )
           }
         </li>

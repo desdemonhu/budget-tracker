@@ -10,6 +10,7 @@ class UpdateCategory extends React.Component {
     this.state = {
       category: this.props.category,
       local: {
+        ...this.props.category,
         name: this.props.category.name || '',
         budget: this.props.category.budget || 0,
       },
@@ -34,6 +35,8 @@ class UpdateCategory extends React.Component {
     store.category.dispatch({type: 'CATEGORY_UPDATE', payload: {id: event.target.value,
     update:this.state.local}})
 
+    this.props.updateItem(this.state.local)
+
     this.props.hideUpdateForm();
   }
 
@@ -44,7 +47,7 @@ class UpdateCategory extends React.Component {
         <form>
           <input type="text" value={this.state.local.name} onChange={this.nameUpdate}></input>
           <input type="number" value={this.state.local.budget} onChange={this.budgetUpdate}></input>
-          <button type="submit" value={this.state.category.id} onClick={this.UpdateCategory}>Update Category</button>
+          <button type="submit" value={this.state.category.key} onClick={this.UpdateCategory}>Update Category</button>
         </form>
       </div>
     )

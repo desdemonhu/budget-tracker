@@ -13,30 +13,13 @@ const reducer = (state = initState, action) => {
   switch(type){
     ///payload: {name: 'name', etc}
     case 'CATEGORY_CREATE':
-      if(typeof payload.name === 'string'){
-        payload.name = payload.name.toLowerCase();
-      }
       return [...state, payload];
     case 'CATEGORY_UPDATE':
       ///payload: {id: 'uuid', update:{name: 'name'}}
-      let index = state.findIndex(value => {
-        return value.id === payload.id
-      })
-    if(index > -1){
-      Object.keys(payload.update).map(key => {
-        if(key === 'name'){
-          state[index][key] = payload.update[key].toLowerCase();
-        }else {
-          state[index][key] = payload.update[key];
-        }
-      })
-      } else {
-        console.log('Item not found');
-      }
-      return state;
+      return state.map(item => item.id === payload.id ? payload.update : item)
     case 'CATEGORY_DESTORY':
     ///payload: {id: uuid}
-      return state.filter(category => category.id !== payload.id);
+      return state.filter(category => category.key !== payload.id);
   default:
     return state;
   }
