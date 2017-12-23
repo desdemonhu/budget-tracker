@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
 import FormCategory from '../form-category'
+import {connect} from 'react-redux'
+import * as action from '../../reducer/action/category-action.js'
 let store = require('../../index.js') ;
 
 class Dashboard extends React.Component {
@@ -19,7 +21,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Dashboard</h1>
-        <FormCategory store={store} updateList={this.updateList}/>
+        <FormCategory store={store} onComplete={this.props.categoryCreate}/>
         <ul>
           {this.state.store.map(category =>{
             return (
@@ -34,4 +36,16 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard
+let mapStateToProps = (state) => {
+  return {
+    state: state,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    categoryCreate: (data) => dispatch(action.create(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

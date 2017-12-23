@@ -37,11 +37,18 @@ class FormCategory extends React.Component {
 
   createCateogry = (e) => {
     e.preventDefault();
-    store.category.dispatch(action.create(this.state.local))
-
-    this.props.updateList(store.category.getState());
+    // store.category.dispatch(action.create(this.state.local))
+    //
+    // this.props.updateList(store.category.getState());
+    this.props.onComplete(this.state.local);
 
     this.clearState();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.store){
+      this.setState(nextProps.store)
+    }
   }
 
   render(){
