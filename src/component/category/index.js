@@ -41,11 +41,11 @@ class Category extends React.Component {
   render(){
     return (
       <div>
-        <li>{this.state.category.name}
+        <h3>{this.state.category.name}</h3>
           <ul>
-            {Object.keys(this.state.category).map(key => {
+            {Object.keys(this.state.category).map((key,i) => {
               if(key !== 'name'){
-                return <li>{key}: {this.state.category[key]}</li>
+                return <li key={i}>{key}: {this.state.category[key]}</li>
                 }
               })
             }
@@ -59,7 +59,6 @@ class Category extends React.Component {
               updateItem={this.updateItem} hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
             )
           }
-        </li>
       </div>
       )
   }

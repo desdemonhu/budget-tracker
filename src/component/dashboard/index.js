@@ -16,8 +16,8 @@ class Dashboard extends React.Component {
       <div>
         <h1>Dashboard</h1>
         <FormCategory onComplete={this.props.categoryCreate}/>
-        <ul>
-          {this.props.state.map((category,i) =>{
+        <div>
+          {this.props.state.category.map((category,i) =>{
             return (
               <div key={i}>
               <Category category={category}
@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
               </div>
             )
           })}
-        </ul>
+        </div>
       </div>
       )
     }
