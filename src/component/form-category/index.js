@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
-import * as action from '../../reducer/action/category-action.js'
 
 class FormCategory extends React.Component {
   constructor(props){
