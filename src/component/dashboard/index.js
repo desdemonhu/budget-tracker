@@ -13,6 +13,17 @@ class Dashboard extends React.Component {
     ///state goes here
   }
 
+  findExpenses = (categoryKey) =>{
+    return this.props.state.expense.map(expense => {
+      if(expense.category === categoryKey){
+        return expense;
+      }else {
+        return '';
+      }
+    }
+  )
+  }
+
   render(){
     return (
       <div>
@@ -25,7 +36,9 @@ class Dashboard extends React.Component {
           {this.props.state.category.map((category,i) =>{
             return (
               <div key={i}>
-              <Category category={category}
+              <Category
+              category={category}
+              findExpenses={this.findExpenses}
               categoryUpdate={this.props.categoryUpdate}
               categoryDestroy={this.props.categoryDestroy}
               />

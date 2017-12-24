@@ -9,6 +9,7 @@ class Category extends React.Component {
     ///state goes here
     this.state = {
       category: this.props.category,
+      expenses: this.props.expenses,
       local: {
         showUpdateForm: false
       }
@@ -41,17 +42,10 @@ class Category extends React.Component {
   render(){
     return (
       <div>
-        <h3>{this.state.category.name}</h3>
-          <ul>
-            {Object.keys(this.state.category).map((key,i) => {
-              if(key !== 'name'){
-                return <li key={i}>{key}: {this.state.category[key]}</li>
-                }
-              })
-            }
-          </ul>
+        <h3>{this.state.category.name}
           <button value={this.state.category.key} onClick={this.deleteCategory} >Delete</button>
           <button value={this.state.category.key} onClick={this.showUpdateForm}>Update</button>
+          </h3>
           {
             this.state.local.showUpdateForm === true && (
               <UpdateCategory
@@ -59,6 +53,27 @@ class Category extends React.Component {
               updateItem={this.updateItem} hideUpdateForm={this.hideUpdateForm} showUpdateForm={this.state.local.showUpdateForm} category={this.state.category}/>
             )
           }
+          {
+            this.props.findExpenses(this.state.category.key).length !== 0 &&
+            <div>
+              <h4>Expenses</h4>
+              <div>
+              <ul>
+                {this.props.findExpenses(this.state.category.key).map((expense,i) => {
+                  return (
+                    <li key={i}>
+                      <h5>{expense.name} - Price: {expense.price}
+                        <button>Update</button>
+                        <button>Delete</button>
+                      </h5>
+                    </li>)
+                  })
+                }
+              </ul>
+            </div>
+          </div>
+          }
+
       </div>
       )
   }
