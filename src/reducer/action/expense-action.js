@@ -16,10 +16,17 @@ export const create = ({name, price, category}) => ({
   }
 })
 
-export const update = () => {
+export const update = ({key,update}) => ({
+  type: 'EXPENSE_UPDATE',
+  payload: {
+    key,
+    update,
+  },
+})
 
-}
-
-export const destroy = () => {
-
-}
+export const destroy = (key) => (
+  {
+    type: 'EXPENSE_DESTORY',
+    payload: key,
+  }
+)

@@ -14,14 +14,7 @@ class Dashboard extends React.Component {
   }
 
   findExpenses = (categoryKey) =>{
-    return this.props.state.expense.map(expense => {
-      if(expense.category === categoryKey){
-        return expense;
-      }else {
-        return '';
-      }
-    }
-  )
+    return this.props.state.expense.filter(expense => expense.category === categoryKey)
   }
 
   render(){
@@ -41,6 +34,9 @@ class Dashboard extends React.Component {
               findExpenses={this.findExpenses}
               categoryUpdate={this.props.categoryUpdate}
               categoryDestroy={this.props.categoryDestroy}
+              expenseDestroy={this.props.expenseDestroy}
+              categories={this.props.state.category}
+              expenseUpdate={this.props.expenseUpdate}
               />
               </div>
             )
@@ -63,6 +59,8 @@ let mapDispatchToProps = (dispatch) => {
     categoryUpdate: (data) => dispatch(action.update(data)),
     categoryDestroy: (data) => dispatch(action.destroy(data)),
     expenseCreate: (data) => dispatch(expenseAction.create(data)),
+    expenseUpdate: (data) => dispatch(expenseAction.update(data)),
+    expenseDestroy: (data) => dispatch(expenseAction.destroy(data)),
   }
 }
 

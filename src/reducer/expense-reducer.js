@@ -16,10 +16,11 @@ const reducer = (state = initState, action) => {
       return [...state, payload];
     case 'EXPENSE_UPDATE':
       ///payload: {key: 'uuid', update:{name: 'name'}}
+      console.log(payload.key);
       return state.map(item => item.key === payload.key ? payload.update : item)
     case 'EXPENSE_DESTORY':
-    ///payload: {key: uuid}
-      return state.filter(category => category.key !== payload.key);
+    ///payload: uuid
+      return state.filter(category => category.key !== payload);
   default:
     return state;
   }

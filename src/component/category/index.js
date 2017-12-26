@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UpdateCategory from '../update-category'
+import UpdateCategory from '../update-category';
+import ExpenseForm from '../expenseForm';
 import * as action from '../../reducer/action/category-action.js'
 
 class Category extends React.Component {
@@ -11,21 +12,39 @@ class Category extends React.Component {
       category: this.props.category,
       expenses: this.props.expenses,
       local: {
-        showUpdateForm: false
+        showUpdateForm: false,
+        showExpenseUpdate: false,
       }
     }
   }
 
   showUpdateForm = () => {
-    this.setState({local:{showUpdateForm: true}})
+    this.setState({local:{...this.local,
+                          showUpdateForm: true}})
   }
 
   hideUpdateForm = () => {
-    this.setState({local: {showUpdateForm: false}})
+    this.setState({local: {...this.local,
+                          showUpdateForm: false}})
+  }
+
+  showExpenseUpdate = () => {
+    this.setState({local: {...this.local,
+                          showExpenseUpdate: true,}})
+  }
+
+  hideExpenseUpdate = () => {
+    this.setState({local: {...this.local,
+                          showExpenseUpdate: false,}})
   }
 
   deleteCategory = (event) => {
     this.props.categoryDestroy(event.target.value);
+  }
+
+  expenseDestroy = (event) => {
+    console.log('props', this.props);
+    this.props.expenseDestroy(event.target.value)
   }
 
   updateItem = (update) => {
@@ -63,8 +82,17 @@ class Category extends React.Component {
                   return (
                     <li key={i}>
                       <h5>{expense.name} - Price: {expense.price}
-                        <button>Update</button>
-                        <button>Delete</button>
+                        <button onClick={this.showExpenseUpdate}>Update</button>
+                        <button value={expense.key} onClick={this.expenseDestroy}>Delete</button>
+                        {
+                          this.state.local.showExpenseUpdate === true &&
+                          <ExpenseForm
+                          hideExpenseUpdate={this.hideExpenseUpdate}
+                          expenseUpdate={this.props.expenseUpdate}
+                          categories={this.props.categories}
+                          expense={expense}
+                          showExpenseUpdate={this.state.local.showExpenseUpdate}/>
+                        }
                       </h5>
                     </li>)
                   })
