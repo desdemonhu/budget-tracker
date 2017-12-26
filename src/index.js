@@ -1,18 +1,15 @@
 'use strict';
 
-let {createStore} = require('redux');
+let {createStore, combineReducers} = require('redux');
 import categoryReducer from './reducer/category-reducer.js'
+import expenseReducer from './reducer/expense-reducer.js'
 
+let reducers = combineReducers({category: categoryReducer, expense: expenseReducer})
+let store = createStore(reducers);
 
-let store = {
-  category: createStore(categoryReducer),
-
-}
-
-store.category.subscribe(() => {
-  console.log('__STATE__', store.category.getState());
+store.subscribe(() => {
+  console.log('__STATE__', store.getState());
 });
-
 
 ///store.getState
 ///store.disptach({type:'', payload:{}})

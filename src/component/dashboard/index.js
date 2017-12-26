@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Category from '../category'
 import FormCategory from '../form-category'
+import ExpenseForm from '../expenseForm'
 import {connect} from 'react-redux'
 import * as action from '../../reducer/action/category-action.js'
+import * as expenseAction from '../../reducer/action/expense-action.js'
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -11,23 +13,35 @@ class Dashboard extends React.Component {
     ///state goes here
   }
 
+  findExpenses = (categoryKey) =>{
+    return this.props.state.expense.filter(expense => expense.category === categoryKey)
+  }
+
   render(){
     return (
       <div>
         <h1>Dashboard</h1>
+        <h4>Category Form</h4>
         <FormCategory onComplete={this.props.categoryCreate}/>
-        <ul>
-          {this.props.state.map((category,i) =>{
+        <h4>Expense Form</h4>
+        <ExpenseForm categories={this.props.state.category} onComplete={this.props.expenseCreate} />
+        <div>
+          {this.props.state.category.map((category,i) =>{
             return (
               <div key={i}>
-              <Category category={category}
+              <Category
+              category={category}
+              findExpenses={this.findExpenses}
               categoryUpdate={this.props.categoryUpdate}
               categoryDestroy={this.props.categoryDestroy}
+              expenseDestroy={this.props.expenseDestroy}
+              categories={this.props.state.category}
+              expenseUpdate={this.props.expenseUpdate}
               />
               </div>
             )
           })}
-        </ul>
+        </div>
       </div>
       )
     }
@@ -44,6 +58,9 @@ let mapDispatchToProps = (dispatch) => {
     categoryCreate: (data) => dispatch(action.create(data)),
     categoryUpdate: (data) => dispatch(action.update(data)),
     categoryDestroy: (data) => dispatch(action.destroy(data)),
+    expenseCreate: (data) => dispatch(expenseAction.create(data)),
+    expenseUpdate: (data) => dispatch(expenseAction.update(data)),
+    expenseDestroy: (data) => dispatch(expenseAction.destroy(data)),
   }
 }
 

@@ -6,7 +6,7 @@ import store from './index.js';
 import App from './component/app';
 
 let view =() =>
-  <Provider store={store.category}>
+  <Provider store={store}>
     <App />
   </Provider>
 
