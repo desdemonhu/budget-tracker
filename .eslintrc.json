@@ -18,5 +18,10 @@
     "comma-dangle": ["error", "always-multiline"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }]
   },
+  "ecmaFeatures": {
+    "modules": true,
+    "impliedStrict": true,
+    "experimentalObjectRestSpread": true
+  },
   "extends": "eslint:recommended"
 }
