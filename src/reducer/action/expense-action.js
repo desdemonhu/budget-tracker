@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-let store = require('../../index.js');
+let store = require('../../lib/store');
 
 let findCategory = (categoryKey) => {
   return store.getState().category.filter(c => c.key === categoryKey)[0].key

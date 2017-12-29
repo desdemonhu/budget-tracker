@@ -1,8 +1,9 @@
 'use strict';
 
-let {createStore, combineReducers} = require('redux');
-import categoryReducer from './reducer/category-reducer.js'
-import expenseReducer from './reducer/expense-reducer.js'
+let {createStore, combineReducers, applyMiddleware} = require('redux');
+import reporter from './redux-reporter';
+import categoryReducer from '../reducer/category-reducer.js';
+import expenseReducer from '../reducer/expense-reducer.js';
 
 let reducers = combineReducers({category: categoryReducer, expense: expenseReducer})
 let store = createStore(reducers);
