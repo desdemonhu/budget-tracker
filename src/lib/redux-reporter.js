@@ -1,5 +1,12 @@
 export default store => next => action => {
-    console.log(action);
-    next();
+    try {
+        console.log('__ACTION__', action);
+        next(action);
+        console.log('__STATE__', store.getState());
+        
+    }catch(err) {
+        console.error(err);
+    }
+    
     
 }
