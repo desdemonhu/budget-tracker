@@ -13,6 +13,7 @@ class ExpenseForm extends React.Component {
       local: {
         name: '',
         price: 0,
+        category: '',
       },
     }
   }

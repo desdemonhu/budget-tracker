@@ -19,10 +19,12 @@
     "quotes": ["error", "single", { "allowTemplateLiterals": true }]
   },
   "parserOptions": {
+    "ecmaVersion": 2016,
+    "sourceType": "module",
     "ecmaFeatures": {
-    "modules": true,
-    "impliedStrict": true,
-    "experimentalObjectRestSpread": true
+      "modules": true,
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "extends": "eslint:recommended"

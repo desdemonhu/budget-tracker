@@ -2,8 +2,12 @@ const uuid = require('uuid');
 let store = require('../../lib/store');
 
 let findCategory = (categoryKey) => {
-  return store.getState().category.filter(c => c.key === categoryKey)[0].key
-}
+  if(!categoryKey){
+    return document.getElementsByName('category-select')[0].firstChild.value;
+  } else {
+    return store.getState().category.filter(c => c.key === categoryKey)[0].key;
+  }
+};
 
 export const create = ({name, price, category}) => ({
   type: 'EXPENSE_CREATE',
@@ -13,8 +17,8 @@ export const create = ({name, price, category}) => ({
     category: findCategory(category),
     key: uuid.v1(),
     stamp: new Date().toString(),
-  }
-})
+  },
+});
 
 export const update = ({key,update}) => ({
   type: 'EXPENSE_UPDATE',
@@ -22,11 +26,11 @@ export const update = ({key,update}) => ({
     key,
     update,
   },
-})
+});
 
 export const destroy = (key) => (
   {
     type: 'EXPENSE_DESTORY',
     payload: key,
   }
-)
+);
